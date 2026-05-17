@@ -7,7 +7,7 @@ WORKDIR /var/www/html
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     libpq-dev \
-    mysql-client \
+    default-mysql-client \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/*
@@ -19,11 +19,14 @@ RUN docker-php-ext-install \
     mysqli \
     && docker-php-ext-enable pdo pdo_mysql mysqli
 
-# Enable Apache mod_rewrite for URL rewriting
-RUN a2enmod rewrite
+# Enable Apache mod_rewrite and mod_env for environment variables
+RUN a2enmod rewrite && a2enmod env
 
 # Copy Apache config
 COPY .docker/apache.conf /etc/apache2/sites-available/000-default.conf
+
+# Create entrypoint script to configure dynamic port
+RUN echo '#!/bin/bash\nset -e\n\n# Use Railway PORT or default to 8080\nPORT=${PORT:-8080}\n\n# Update Apache port in configuration\nsed -i "s/<VirtualHost \*:[0-9]*>/<VirtualHost *:${PORT}>/g" /etc/apache2/sites-available/000-default.conf\nsed -i "s/Listen [0-9]*/Listen ${PORT}/" /etc/apache2/ports.conf 2>/dev/null || echo "Listen ${PORT}" >> /etc/apache2/ports.conf\n\necho "Starting Apache on port ${PORT}"\nexec apache2-foreground' > /entrypoint.sh && chmod +x /entrypoint.sh
 
 # Copy application files
 COPY . /var/www/html/
@@ -42,12 +45,12 @@ RUN { \
         echo "max_execution_time = 60"; \
     } > /usr/local/etc/php/conf.d/uploads.ini
 
-# Expose port 80
-EXPOSE 80
+# Expose port (Railway will override this via PORT env var)
+EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost/ || exit 1
+    CMD curl -f http://localhost:${PORT:-8080}/ || exit 1
 
-# Start Apache in foreground
-CMD ["apache2-foreground"]
+# Start entrypoint script that configures dynamic port
+ENTRYPOINT ["/entrypoint.sh"]
