@@ -19,11 +19,9 @@ RUN docker-php-ext-install \
     mysqli \
     && docker-php-ext-enable pdo pdo_mysql mysqli
 
-# Fix Apache MPM conflict - disable conflicting modules and keep only mpm_prefork
-RUN a2dismod mpm_worker mpm_event 2>/dev/null || true && \
-    rm -f /etc/apache2/mods-enabled/mpm_worker.* /etc/apache2/mods-enabled/mpm_event.* && \
-    a2enmod mpm_prefork && \
-    rm -f /etc/apache2/mods-enabled/mpm_prefork.* && \
+# Fix Apache MPM conflict - ensure only mpm_prefork is enabled
+RUN a2dismod mpm_event mpm_worker mpm_prefork 2>/dev/null || true && \
+    rm -f /etc/apache2/mods-enabled/mpm_*.load /etc/apache2/mods-enabled/mpm_*.conf && \
     a2enmod mpm_prefork && \
     a2enmod rewrite && \
     a2enmod env
