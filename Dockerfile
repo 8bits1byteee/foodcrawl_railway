@@ -21,6 +21,9 @@ RUN docker-php-ext-install \
 
 # Fix Apache MPM conflict - disable conflicting modules and keep only mpm_prefork
 RUN a2dismod mpm_worker mpm_event 2>/dev/null || true && \
+    rm -f /etc/apache2/mods-enabled/mpm_worker.* /etc/apache2/mods-enabled/mpm_event.* && \
+    a2enmod mpm_prefork && \
+    rm -f /etc/apache2/mods-enabled/mpm_prefork.* && \
     a2enmod mpm_prefork && \
     a2enmod rewrite && \
     a2enmod env
