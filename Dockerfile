@@ -25,9 +25,6 @@ RUN a2enmod rewrite && a2enmod env
 # Copy Apache config
 COPY .docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Create entrypoint script to configure dynamic port
-RUN echo '#!/bin/bash\nset -e\n\n# Use Railway PORT or default to 8080\nPORT=${PORT:-8080}\n\n# Update Apache port in configuration\nsed -i "s/<VirtualHost \*:[0-9]*>/<VirtualHost *:${PORT}>/g" /etc/apache2/sites-available/000-default.conf\nsed -i "s/Listen [0-9]*/Listen ${PORT}/" /etc/apache2/ports.conf 2>/dev/null || echo "Listen ${PORT}" >> /etc/apache2/ports.conf\n\necho "Starting Apache on port ${PORT}"\nexec apache2-foreground' > /entrypoint.sh && chmod +x /entrypoint.sh
-
 # Copy application files
 COPY . /var/www/html/
 
@@ -46,11 +43,7 @@ RUN { \
     } > /usr/local/etc/php/conf.d/uploads.ini
 
 # Expose port (Railway will override this via PORT env var)
-EXPOSE 8080
+EXPOSE ${PORT:-80}
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:${PORT:-8080}/ || exit 1
-
-# Start entrypoint script that configures dynamic port
-ENTRYPOINT ["/entrypoint.sh"]
+# Start Apache with dynamic port configured at runtime
+CMD sed -i "s/80/${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf && apache2-foreground
