@@ -1,0 +1,24 @@
+{
+  "name": "Estancia Food Crawl",
+  "short_name": "Food Crawl",
+  "description": "Discover the best local restaurants in Estancia, Iloilo",
+  "start_url": "./index.php",
+  "display": "standalone",
+  "background_color": "#fff9ef",
+  "theme_color": "#ffb36b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

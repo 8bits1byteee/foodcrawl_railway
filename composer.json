@@ -1,0 +1,17 @@
+{
+  "name": "foodcrawl/estancia-food-crawl",
+  "description": "Estancia Food Crawl - Discover Local Restaurants",
+  "type": "project",
+  "require": {
+    "php": "^8.1"
+  },
+  "require-dev": {
+    "php": "^8.1"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "8.2"
+    }
+  }
+}

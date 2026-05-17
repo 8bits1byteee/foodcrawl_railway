@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "${APP_PORT:-8080}:80"
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=${MYSQL_DATABASE:-food_crawl}
+      - DB_USER=${MYSQL_USER:-root}
+      - DB_PASS=${MYSQL_PASSWORD:-}
+      - MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN}
+    volumes:
+      - ./:/var/www/html
+      - ./images:/var/www/html/images
+    depends_on:
+      - mysql
+    networks:
+      - foodcrawl-network
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-food_crawl}
+      MYSQL_USER: ${MYSQL_USER:-foodcrawl}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./food_crawl.sql:/docker-entrypoint-initdb.d/01-food_crawl.sql
+      - ./create_ratings_table.sql:/docker-entrypoint-initdb.d/02-create_ratings_table.sql
+      - ./create_reports_table.sql:/docker-entrypoint-initdb.d/03-create_reports_table.sql
+    networks:
+      - foodcrawl-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: ${MYSQL_USER:-foodcrawl}
+      PMA_PASSWORD: ${MYSQL_PASSWORD:-password}
+    ports:
+      - "${PMA_PORT:-8081}:80"
+    depends_on:
+      - mysql
+    networks:
+      - foodcrawl-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  foodcrawl-network:
+    driver: bridge

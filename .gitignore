@@ -1,0 +1,53 @@
+# Environment variables (contains sensitive data)
+.env
+.env.local
+.env.*.local
+.env.railway
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+debug-logs/
+
+# Node modules (if using)
+node_modules/
+
+# PHP
+vendor/
+composer.lock
+.venv/
+
+# User uploads and attachments (regenerated on deployment)
+images/attachments/
+images/restaurants/
+
+# Temporary files
+*.xlsx
+*.tmp
+tmp/
+temp/
+
+# Database backups
+*.sql.backup
+*.sql.bak
+backup/
+backups/
+
+# Railway deployment
+.railway/
+.nixpacks.toml
+
+# Testing
+test-*.php
+debug-*.php

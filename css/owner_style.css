@@ -1,0 +1,1749 @@
+/* ============================================
+   Owner Dashboard Styles
+   ============================================ */
+
+/* Owner header color variation */
+.owner-header {
+    background: linear-gradient(135deg, var(--dashboard-header-start, var(--brand)), var(--dashboard-header-end, var(--brand-2))) !important;
+}
+
+/* Sidebar always starts from the very top, above the header */
+.owner-page .admin-sidebar {
+    top: 0 !important;
+    z-index: 13001 !important;
+}
+
+/* Header sits to the right of the sidebar on desktop */
+.owner-page .owner-header {
+    left: 250px;
+}
+.owner-page.admin-sidebar-collapsed .owner-header {
+    left: 68px;
+}
+.owner-page.admin-sidebar-collapsed.admin-sidebar-hovering .owner-header {
+    left: 68px;
+}
+
+/* Make the owner header slightly larger than the default admin header. */
+.owner-page .owner-header {
+    height: 3.8rem;
+    padding: 0 1.7rem;
+    gap: 0.9rem;
+}
+
+.owner-page .owner-header .admin-title {
+    font-size: 1.1rem;
+    gap: 0.55rem;
+}
+
+.owner-page .owner-header .admin-title i {
+    font-size: 1.1rem;
+}
+
+.owner-page .owner-header .admin-btn {
+    padding: 0.52rem 0.98rem;
+    font-size: 0.88rem;
+}
+
+/* Keep page content aligned below the larger owner header. */
+.owner-page .container {
+    padding-top: 3.8rem;
+}
+
+/* Match sidebar top line/row with the larger owner header height. */
+.owner-page .sidebar-user {
+    height: 3.8rem;
+}
+
+.owner-mobile-menu {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 0.45rem 0.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.owner-mobile-menu:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; }
+
+.owner-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 13000;
+}
+
+/* Pin Account Settings link to bottom of sidebar */
+.owner-page .admin-menu {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 0.35rem;
+    padding-bottom: 0;
+}
+
+/* Notification badge */
+.notif-btn {
+    position: relative;
+}
+.notif-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* Notification dropdown */
+.notif-dropdown {
+    position: fixed;
+    top: calc(var(--header-height, 56px) + 8px);
+    right: 1rem;
+    width: 380px;
+    max-height: 480px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    z-index: 15000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.notif-dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fafafa;
+}
+.notif-dropdown-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+}
+.notif-mark-all {
+    background: none;
+    border: none;
+    color: #ff6b5a;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.notif-mark-all:hover { text-decoration: underline; }
+
+.notif-list {
+    overflow-y: auto;
+    max-height: 400px;
+    padding: 0.25rem 0;
+}
+
+.notif-empty {
+    text-align: center;
+    padding: 2rem;
+    color: #9ca3af;
+}
+.notif-empty i { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+
+.notif-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: default;
+    transition: background 0.15s;
+}
+.notif-item:hover { background: #f9fafb; }
+.notif-item.unread { background: #fff7ed; }
+.notif-item.unread:hover { background: #ffedd5; }
+
+.notif-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+.notif-icon.approved { background: #dcfce7; color: #16a34a; }
+.notif-icon.rejected { background: #fee2e2; color: #dc2626; }
+.notif-icon.info { background: #dbeafe; color: #2563eb; }
+
+.notif-content { flex: 1; min-width: 0; }
+.notif-message {
+    margin: 0 0 0.25rem;
+    font-size: 0.88rem;
+    color: #374151;
+    line-height: 1.35;
+}
+.notif-time {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+/* Owner restaurant grid */
+.owner-restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.owner-restaurant-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.owner-restaurant-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.orc-image {
+    position: relative;
+    height: 180px;
+    background: #f5f5f5;
+    overflow: hidden;
+}
+.orc-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.orc-no-image {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #d1d5db;
+}
+
+.orc-pending-badge {
+    background: #f59e0b;
+    color: #fff;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.orc-info {
+    padding: 1rem;
+}
+.orc-info h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+.orc-category {
+    font-size: 0.85rem;
+    color: #ff6b5a;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+}
+.orc-address {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin: 0 0 0.75rem;
+}
+.orc-address i { color: #9ca3af; margin-right: 0.3rem; }
+
+.orc-edit-btn {
+    padding: 0.6rem 1.4rem;
+    background: linear-gradient(135deg, #ff8f5e, #ff6b5a);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: transform 0.1s, box-shadow 0.15s;
+    white-space: nowrap;
+}
+.orc-edit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 107, 90, 0.3);
+}
+
+/* Owner restaurant detail list */
+.owner-restaurant-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.orc-detail-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e5e7eb;
+}
+
+.orc-detail-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.orc-detail-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #f5f5f5;
+}
+.orc-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.orc-detail-image .orc-no-image {
+    width: 100%;
+    height: 100%;
+    font-size: 1.5rem;
+}
+
+/* Owner dashboard */
+.owner-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.owner-stat-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.owner-stat-card[data-owner-go-tab] {
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.owner-stat-card[data-owner-go-tab]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px rgba(17, 24, 39, 0.08);
+}
+
+.owner-stat-card[data-owner-go-tab]:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.owner-stat-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffedd5;
+    color: #ea580c;
+    font-size: 1rem;
+}
+
+.owner-stat-icon.pending { background: #fef3c7; color: #d97706; }
+.owner-stat-icon.bell { background: #dbeafe; color: #2563eb; }
+.owner-stat-icon.approved { background: #dcfce7; color: #16a34a; }
+
+.owner-stat-content h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #111827;
+    line-height: 1.1;
+}
+
+.owner-stat-label {
+    margin: 0 0 0.35rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.owner-dashboard-panels {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1rem;
+}
+
+.owner-dashboard-panel {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.owner-dashboard-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.owner-dashboard-panel-head h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #1f2937;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.owner-panel-link {
+    border: none;
+    background: #fff7ed;
+    color: #ea580c;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 0.38rem 0.7rem;
+    cursor: pointer;
+}
+
+.owner-panel-link:hover {
+    background: #ffedd5;
+}
+
+.owner-dashboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.owner-dashboard-list li {
+    border: 1px solid #f1f5f9;
+    border-radius: 10px;
+    padding: 0.7rem 0.75rem;
+    background: #fafafa;
+}
+
+.owner-dashboard-list li p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.owner-dashboard-list li span {
+    font-size: 0.78rem;
+    color: #6b7280;
+}
+
+.owner-dashboard-status {
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+}
+
+.owner-dashboard-status.pending { background: #fef3c7; color: #92400e; }
+.owner-dashboard-status.approved { background: #dcfce7; color: #166534; }
+.owner-dashboard-status.rejected { background: #fee2e2; color: #991b1b; }
+
+.owner-dashboard-empty {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.owner-dashboard-map-card {
+    margin-top: 1rem;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.owner-dashboard-map-head {
+    margin-bottom: 0.8rem;
+}
+
+.owner-dashboard-map-wrap {
+    position: relative;
+}
+
+#ownerDashboardMap {
+    width: 100%;
+    height: 420px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#ownerDashboardMap .mapboxgl-control-container {
+    display: none !important;
+}
+
+.owner-map-home-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 6;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #1f2937;
+    border-radius: 10px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.owner-map-home-btn:hover {
+    background: #f9fafb;
+}
+
+.owner-dashboard-marker {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: #fff;
+    border: 2px solid #fb923c;
+    color: #ea580c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    #ownerDashboardMap {
+        height: 320px;
+        border: none;
+        border-radius: 0;
+    }
+    .owner-dashboard-map-card {
+        padding: 0;
+    }
+    .owner-dashboard-map-head {
+        padding: 0.8rem 1rem 0.7rem;
+        margin-bottom: 0;
+    }
+}
+
+.orc-detail-title {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+.orc-detail-title h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #1f2937;
+    width: 100%;
+}
+
+.orc-detail-category {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    background: #ff6b5a;
+}
+
+.orc-detail-body {
+    padding: 1.25rem;
+}
+
+.orc-detail-description {
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    background: #f9fafb;
+    border-radius: 8px;
+    border-left: none;
+}
+.orc-detail-description p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+.orc-detail-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.orc-detail-section {
+    background: #fafbfc;
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid #f0f0f0;
+}
+.orc-detail-section h4 {
+    margin: 0 0 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ff6b5a;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.orc-detail-section h4 i {
+    font-size: 0.85rem;
+}
+
+.orc-detail-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.orc-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.orc-detail-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.orc-detail-value {
+    font-size: 0.88rem;
+    color: #374151;
+    word-break: break-word;
+}
+.orc-detail-value a {
+    color: #ff6b5a;
+    text-decoration: none;
+}
+.orc-detail-value a:hover {
+    text-decoration: underline;
+}
+
+.orc-empty {
+    color: #d1d5db;
+    font-style: italic;
+    font-size: 0.85rem;
+}
+.orc-empty-block {
+    color: #d1d5db;
+    font-style: italic;
+    font-size: 0.85rem;
+    margin: 0;
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+/* Hours table */
+.orc-hours-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+.orc-hours-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+}
+.orc-hours-row.today {
+    background: #fff7ed;
+    font-weight: 600;
+}
+.orc-hours-row.closed .orc-hours-time {
+    color: #ef4444;
+}
+.orc-hours-day {
+    color: #4b5563;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.orc-today-badge {
+    font-size: 0.6rem;
+    background: #ff6b5a;
+    color: #fff;
+    padding: 0.1rem 0.4rem;
+    border-radius: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.orc-hours-time {
+    color: #6b7280;
+}
+.orc-closed-text {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+/* Tag list (menu items) */
+.orc-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+.orc-tag {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    background: #fff7ed;
+    color: #c2410c;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+/* Facilities grid */
+.orc-facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+}
+.orc-facility-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.5rem 0.25rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+}
+.orc-facility-item i {
+    font-size: 1rem;
+    color: #9ca3af;
+    margin-bottom: 0.3rem;
+}
+.orc-facility-label {
+    font-size: 0.68rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+.orc-facility-value {
+    font-size: 0.82rem;
+    color: #374151;
+    font-weight: 600;
+}
+.orc-facility-value.yes {
+    color: #059669;
+}
+
+/* Responsive: stack sections on smaller screens */
+@media (max-width: 850px) {
+    .orc-detail-sections {
+        grid-template-columns: 1fr;
+    }
+    .orc-detail-header {
+        flex-wrap: wrap;
+    }
+    .orc-edit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .orc-facilities-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .orc-facilities-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.35rem;
+    }
+    .orc-facility-item {
+        padding: 0.45rem 0.2rem;
+        border-radius: 8px;
+    }
+    .orc-facility-item i { font-size: 0.85rem; margin-bottom: 0.2rem; }
+    .orc-facility-label { font-size: 0.6rem; }
+    .orc-facility-value { font-size: 0.75rem; }
+}
+
+/* Owner image previews in edit modal (read-only) */
+.owner-image-preview-row,
+.owner-image-preview-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+.owner-img-thumb {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #e5e7eb;
+    background: #f9fafb;
+    flex-shrink: 0;
+}
+.owner-img-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.owner-image-preview-row .owner-img-thumb {
+    width: 80px;
+    height: 80px;
+}
+
+.logo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-preview-box {
+    width: 120px;
+    height: 120px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 10px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo-preview-box .image-preview {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+}
+
+.owner-logo-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #cbd5e1;
+    font-size: 2rem;
+}
+
+/* Full notification list (in tab) */
+.tab-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.owner-delete-all-btn {
+    border: 1px solid #fecaca;
+    background: #fff1f2;
+    color: #dc2626;
+    border-radius: 8px;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.owner-delete-all-btn:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+.owner-delete-all-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.notif-full-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.notif-full-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    transition: background 0.15s;
+}
+.notif-full-item.unread { background: #fff7ed; border-color: #fed7aa; }
+
+.notif-full-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+.notif-full-icon.approved { background: #dcfce7; color: #16a34a; }
+.notif-full-icon.rejected { background: #fee2e2; color: #dc2626; }
+.notif-full-icon.info { background: #dbeafe; color: #2563eb; }
+
+.notif-full-content { flex: 1; }
+.notif-full-message {
+    margin: 0 0 0.3rem;
+    color: #374151;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+.notif-full-time {
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.owner-item-delete {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #fecaca;
+    background: #fff1f2;
+    color: #dc2626;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.owner-item-delete:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+.owner-item-delete:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Change history list */
+.change-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.change-history-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    align-items: flex-start;
+}
+.change-history-item.status-approved { border-left: none; }
+.change-history-item.status-rejected { border-left: none; }
+.change-history-item.status-pending { border-left: none; }
+
+.ch-status { flex-shrink: 0; }
+.ch-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.ch-badge.pending { background: #fef3c7; color: #b45309; }
+.ch-badge.approved { background: #dcfce7; color: #16a34a; }
+.ch-badge.rejected { background: #fee2e2; color: #dc2626; }
+
+.ch-details { flex: 1; }
+.ch-headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+.ch-details h4 { margin: 0 0 0.25rem; font-size: 1rem; color: #1f2937; }
+.ch-date { font-size: 0.8rem; color: #9ca3af; }
+.ch-fields { margin-top: 0.4rem; font-size: 0.85rem; color: #6b7280; }
+.ch-notes { margin-top: 0.4rem; font-size: 0.85rem; color: #374151; background: #f9fafb; padding: 0.5rem; border-radius: 6px; }
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #9ca3af;
+}
+.empty-state i {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+    display: block;
+}
+.empty-state h3 {
+    margin: 0 0 0.5rem;
+    color: #6b7280;
+    font-size: 1.1rem;
+}
+.empty-state p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.tab-subtitle {
+    color: #6b7280;
+    font-size: 0.92rem;
+    margin: 0.25rem 0 1rem;
+}
+
+/* Toast */
+.owner-toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 20000;
+    display: flex;
+    align-items: center;
+}
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    animation: slideInRight 0.3s ease;
+}
+.owner-toast.success .toast-content {
+    background: #dcfce7;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+}
+.owner-toast.error .toast-content {
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+.owner-toast.info .toast-content {
+    background: #dbeafe;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* ============================================
+   Admin Pending Changes Styles
+   ============================================ */
+
+.pending-filter-bar {
+    margin-bottom: 1rem;
+}
+.pending-filter-bar select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: #fff;
+}
+
+.pending-changes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pending-change-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.pending-change-card.status-pending { border-left: none; }
+.pending-change-card.status-approved { border-left: 4px solid #16a34a; }
+.pending-change-card.status-rejected { border-left: 4px solid #dc2626; }
+
+.pc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    background: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+}
+.pc-info h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+.pc-info h3 i { color: #f59e0b; margin-right: 0.3rem; }
+.pc-meta {
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+.pc-meta i { margin-right: 0.15rem; }
+
+.pc-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+.pc-status-badge.pending { background: #fef3c7; color: #b45309; }
+.pc-status-badge.approved { background: #dcfce7; color: #16a34a; }
+.pc-status-badge.rejected { background: #fee2e2; color: #dc2626; }
+
+.pc-changes {
+    padding: 1rem 1.25rem;
+}
+
+.pc-changes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+.pc-changes-table th {
+    text-align: left;
+    padding: 0.5rem;
+    background: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+    color: #374151;
+    font-weight: 700;
+}
+.pc-changes-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+    color: #4b5563;
+    word-break: break-word;
+}
+.pc-old-value {
+    background: #fef2f2;
+    color: #991b1b;
+}
+.pc-new-value {
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.pc-chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.pc-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    color: inherit;
+}
+
+.pc-hours-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.pc-hours-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.2rem 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+}
+
+.pc-hours-row:last-child {
+    border-bottom: none;
+}
+
+.pc-hours-day {
+    font-weight: 600;
+    color: #374151;
+}
+
+.pc-hours-time {
+    color: #4b5563;
+}
+
+.pc-supporting-docs {
+    border-top: 1px solid #e5e7eb;
+}
+.pc-supporting-docs-header {
+    padding: 0.6rem 1.25rem;
+    background: #f8fafc;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+.pc-supporting-docs-body {
+    padding: 1rem 1.25rem;
+    background: #fff;
+}
+
+.pc-location-preview {
+    border-top: 1px solid #e5e7eb;
+}
+
+.pc-location-preview-header {
+    padding: 0.6rem 1.25rem;
+    background: #f8fafc;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.pc-location-preview-body {
+    padding: 1rem 1.25rem;
+    background: #fff;
+}
+
+.pc-location-map-note {
+    font-size: 0.82rem;
+    color: #6b7280;
+    margin-bottom: 0.6rem;
+}
+
+.pc-location-map {
+    width: 100%;
+    max-width: 100%;
+    height: 260px;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    overflow: hidden;
+}
+
+/* Embedded pending-change map previews: keep UI minimal (no extra controls) */
+.pc-location-map .mapboxgl-ctrl-top-right,
+.pc-location-map .mapboxgl-ctrl-top-left {
+    display: none !important;
+}
+
+/* Remove the bottom-left Mapbox logo/control bubble in preview maps */
+.pc-location-map .mapboxgl-ctrl-bottom-left,
+.pc-location-map .mapboxgl-ctrl-logo {
+    display: none !important;
+}
+
+/* Prevent Mapbox attribution/logo from inheriting global "round white button" styles */
+.pc-location-map .mapboxgl-ctrl-bottom-right {
+    margin: 0 6px 6px 0 !important;
+}
+
+.pc-location-map .mapboxgl-ctrl-attrib {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    padding: 2px 6px !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+}
+
+.pc-location-map .mapboxgl-ctrl a,
+.pc-location-map .mapboxgl-ctrl button,
+.pc-location-map .mapboxgl-ctrl-attrib a,
+.pc-location-map .mapboxgl-ctrl-attrib button {
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+}
+
+/* Hide the attribution toggle button; keep text visible */
+.pc-location-map .mapboxgl-ctrl-attrib .mapboxgl-ctrl-attrib-button {
+    display: none !important;
+}
+.pc-location-map .mapboxgl-ctrl-attrib .mapboxgl-ctrl-attrib-inner {
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+
+.pc-location-map-fallback {
+    padding: 0.75rem 0.9rem;
+    border: 1px dashed #d1d5db;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #4b5563;
+    font-size: 0.85rem;
+}
+
+.pc-admin-notes {
+    padding: 0.75rem 1.25rem;
+    background: #fffbeb;
+    border-top: 1px solid #fde68a;
+    font-size: 0.85rem;
+    color: #92400e;
+}
+
+.pc-actions {
+    padding: 0.75rem 1.25rem;
+    background: #f9fafb;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.pc-notes-input { flex: 1; min-width: 200px; }
+.pc-notes-field {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    box-sizing: border-box;
+}
+.pc-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.pc-btn {
+    padding: 0.55rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: transform 0.1s, box-shadow 0.15s;
+}
+.pc-btn:hover { transform: translateY(-1px); }
+
+.pc-btn-approve {
+    background: #16a34a;
+    color: #fff;
+}
+.pc-btn-approve:hover { box-shadow: 0 3px 10px rgba(22, 163, 74, 0.3); }
+
+.pc-btn-reject {
+    background: #dc2626;
+    color: #fff;
+}
+.pc-btn-reject:hover { box-shadow: 0 3px 10px rgba(220, 38, 38, 0.3); }
+
+/* Nav badge in sidebar */
+.nav-badge {
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.4rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .owner-page .admin-content {
+        flex-direction: row;
+    }
+
+    .owner-page .admin-sidebar {
+        width: 250px;
+        order: 0;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        overflow-y: hidden;
+        z-index: 13001;
+    }
+
+    .owner-page .admin-main {
+        order: 0;
+        margin-left: 250px;
+    }
+
+    .owner-page.admin-sidebar-collapsed .admin-sidebar {
+        width: 62px;
+    }
+
+    .owner-page.admin-sidebar-collapsed .admin-main {
+        margin-left: 62px;
+    }
+
+    .owner-page.admin-sidebar-collapsed .menu-label {
+        display: none;
+    }
+
+    .owner-page.admin-sidebar-collapsed .menu-item {
+        justify-content: center;
+        padding: 0.78rem 0.35rem;
+        margin: 0.1rem 0.5rem;
+    }
+
+    .owner-restaurant-grid {
+        grid-template-columns: 1fr;
+    }
+    .notif-dropdown {
+        width: calc(100% - 2rem);
+        right: 1rem;
+        left: 1rem;
+    }
+    .pc-actions {
+        flex-direction: column;
+    }
+    .pc-notes-input { min-width: unset; }
+
+    .admin-main {
+        padding: 1rem;
+        padding-bottom: max(1.75rem, calc(1rem + env(safe-area-inset-bottom)));
+    }
+
+    .owner-dashboard-grid,
+    .owner-dashboard-panels {
+        grid-template-columns: 1fr;
+    }
+
+    .owner-dashboard-panel-head {
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .owner-dashboard-panel-head h3 {
+        width: 100%;
+    }
+
+    .tab-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .owner-delete-all-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .notif-full-item,
+    .change-history-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .owner-item-delete {
+        align-self: flex-end;
+    }
+
+    .ch-headline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.45rem;
+    }
+
+    .ch-headline .owner-item-delete {
+        align-self: flex-end;
+    }
+
+    .owner-stat-card {
+        align-items: flex-start;
+    }
+
+    .owner-stat-content h3 {
+        font-size: 1.35rem;
+    }
+
+    #ownerAccountForm {
+        max-width: 100% !important;
+    }
+
+    #ownerAccountForm .inline-pair {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    #ownerEditModal .modal-content {
+        width: min(96vw, 720px);
+        max-height: 94vh;
+    }
+}
+
+@media (max-width: 720px) {
+    .admin-header {
+        grid-template-columns: auto 1fr auto;
+        padding: 0 0.65rem;
+        gap: 0.45rem;
+        left: 0 !important; /* full-width on mobile – sidebar is hidden */
+    }
+
+    .owner-mobile-menu { display: inline-flex; }
+
+    .admin-title {
+        justify-self: center;
+        text-align: center;
+        font-size: 0.95rem;
+        gap: 0.4rem;
+    }
+
+    .admin-actions {
+        justify-self: end;
+        gap: 0.3rem;
+    }
+
+    .admin-btn {
+        padding: 0.42rem 0.5rem;
+        border-radius: 10px;
+    }
+
+    /* Mobile sidebar hidden by default */
+    .owner-page .admin-sidebar-toggle { display: none; }
+    .owner-page .admin-sidebar {
+        top: 0;
+        transform: translateX(-100%);
+        visibility: hidden;
+        transition: transform 0.2s ease, visibility 0.2s ease;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        z-index: 13001;
+    }
+    .owner-page.owner-sidebar-open .admin-sidebar {
+        transform: translateX(0);
+        visibility: visible;
+    }
+    .owner-page .admin-main {
+        margin-left: 0 !important;
+        padding: 1rem;
+        /* Use dvh so the height excludes the browser's address/nav bars */
+        height: calc(100dvh - var(--header-height, 3.8rem) - env(safe-area-inset-top, 0px));
+        /* Ensure last item clears the iPhone home indicator / Android nav bar */
+        padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px));
+    }
+    .owner-page.owner-sidebar-open .owner-sidebar-overlay { display: block; }
+
+    /* Compact dashboard on mobile */
+    .owner-page .admin-main h2 { font-size: 1.35rem; margin: 0 0 0.6rem; }
+    .owner-page .tab-subtitle { font-size: 0.95rem; }
+    /* 2x2 grid on mobile for key stats */
+    .owner-dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+    .owner-stat-card {
+        padding: 0.55rem 0.5rem;
+        gap: 0.35rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        min-height: 95px;
+    }
+    .owner-stat-icon { width: 28px; height: 28px; font-size: 0.75rem; margin-bottom: 0.1rem; }
+    .owner-stat-content h3 { font-size: 1rem; }
+    .owner-stat-label { font-size: 0.72rem; margin-bottom: 0.1rem; line-height: 1.2; }
+    .owner-dashboard-panels { grid-template-columns: 1fr; gap: 0.75rem; }
+    .owner-dashboard-panel { padding: 0.85rem; }
+    .owner-dashboard-panel-head { margin-bottom: 0.6rem; }
+    .owner-dashboard-panel-head h3 { font-size: 0.95rem; }
+    .owner-panel-link { padding: 0.32rem 0.6rem; font-size: 0.78rem; }
+
+    /* Map card — edge-to-edge map inside rounded card */
+    .owner-dashboard-map-card {
+        padding: 0;
+        overflow: hidden;
+    }
+    .owner-dashboard-map-head {
+        padding: 0.75rem 1rem 0.65rem;
+        margin-bottom: 0;
+    }
+    #ownerDashboardMap {
+        height: 300px;
+        border: none;
+        border-radius: 0;
+    }
+    .owner-map-home-btn {
+        top: 10px;
+        left: 10px;
+        padding: 0.38rem 0.65rem;
+        font-size: 0.78rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+
+    .owner-dashboard-map-card,
+    .owner-dashboard-panel,
+    .owner-stat-card,
+    .orc-detail-card,
+    .notif-full-item,
+    .change-history-item {
+        border-radius: 10px;
+    }
+
+    .orc-detail-header {
+        padding: 0.85rem;
+        gap: 0.75rem;
+    }
+
+    .orc-detail-image {
+        width: 56px;
+        height: 56px;
+    }
+
+    .orc-detail-title h3 {
+        font-size: 1.02rem;
+    }
+
+    .orc-detail-body {
+        padding: 0.85rem;
+    }
+
+    .orc-facilities-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.35rem;
+    }
+
+    .pc-changes {
+        overflow-x: auto;
+    }
+
+    .pc-changes-table {
+        min-width: 560px;
+    }
+
+    /* Edit modal footer buttons — compact on mobile */
+    #ownerEditModal .sticky-actions {
+        padding: 0.6rem 0.9rem;
+        padding-bottom: max(0.6rem, env(safe-area-inset-bottom));
+        gap: 0.6rem;
+    }
+    #ownerEditModal .sticky-actions .btn,
+    #ownerEditModal .sticky-actions .btn-primary {
+        width: auto;
+        max-width: none;
+        flex: 1;
+        font-size: 0.88rem;
+        padding: 0.6rem 0.75rem;
+        min-height: 42px;
+        border-radius: 10px;
+        white-space: nowrap;
+    }
+
+    /* Edit modal header — match the owner page header height/feel on mobile */
+    #ownerEditModal .modal-header.restaurant-edit-header {
+        min-height: var(--header-height, 3.8rem);
+        padding: 0 1.1rem;
+        align-items: center;
+    }
+    #ownerEditModal .modal-header.restaurant-edit-header .modal-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        gap: 0.55rem;
+    }
+    #ownerEditModal .modal-header.restaurant-edit-header .modal-title i {
+        font-size: 1rem;
+    }
+    #ownerEditModal .modal-close {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}

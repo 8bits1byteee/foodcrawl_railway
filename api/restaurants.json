@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "name": "Seaside Grill",
+    "address": "123 Coastal Road, Estancia, Iloilo",
+    "phone": "0912-345-6789",
+    "hours": "10:00 AM - 9:00 PM",
+    "description": "Fresh seafood with ocean view",
+    "menu_items": "Grilled Fish, Seafood Platter, Shrimp Sinigang",
+    "image_path": "images/restaurants/seaside_grill.jpg",
+    "visit_count": 150,
+    "latitude": 11.4550,
+    "longitude": 123.1525
+  },
+  {
+    "id": 2,
+    "name": "Mama's Kitchen", 
+    "address": "456 Main Street, Estancia, Iloilo",
+    "phone": "0917-890-1234",
+    "hours": "7:00 AM - 8:00 PM",
+    "description": "Home-cooked Filipino favorites",
+    "menu_items": "Adobo, Sinigang, Kare-Kare, Lechon Kawali",
+    "image_path": "images/restaurants/mamas_kitchen.jpg",
+    "visit_count": 200,
+    "latitude": 11.4560,
+    "longitude": 123.1530
+  },
+  {
+    "id": 3,
+    "name": "Estancia Delights",
+    "address": "789 Baywalk, Estancia, Iloilo",
+    "phone": "0918-765-4321",
+    "hours": "11:00 AM - 10:00 PM",
+    "description": "Modern Filipino fusion cuisine",
+    "menu_items": "Crispy Pata, Bulalo, Sisig, Halo-Halo",
+    "image_path": "images/restaurants/estancia_delights.jpg",
+    "visit_count": 120,
+    "latitude": 11.4540,
+    "longitude": 123.1510
+  }
+]

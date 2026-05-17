@@ -1,0 +1,83 @@
+/* Delete Button Styles for Restaurant Cards */
+
+.restaurant-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-edit,
+.btn-delete {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(76, 175, 80, 0.2);
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-edit:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(76, 175, 80, 0.2);
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(244, 67, 54, 0.2);
+}
+
+.btn-delete:hover {
+    background: linear-gradient(135deg, #da190b 0%, #ba0a06 100%);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-delete:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(244, 67, 54, 0.2);
+}
+
+.btn-edit:focus,
+.btn-delete:focus {
+    outline: 2px solid rgba(0, 0, 0, 0.2);
+    outline-offset: 2px;
+}
+
+.btn-edit i,
+.btn-delete i {
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .restaurant-actions {
+        flex-direction: column;
+    }
+    
+    .btn-edit,
+    .btn-delete {
+        width: 100%;
+        min-width: unset;
+    }
+}
