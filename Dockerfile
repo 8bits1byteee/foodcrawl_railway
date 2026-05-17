@@ -33,6 +33,11 @@ COPY .docker/apache.conf /etc/apache2/sites-available/000-default.conf
 RUN echo '#!/bin/bash' > /entrypoint.sh && \
     echo 'set -e' >> /entrypoint.sh && \
     echo '' >> /entrypoint.sh && \
+    echo '# Ensure only mpm_prefork is enabled at runtime' >> /entrypoint.sh && \
+    echo 'a2dismod mpm_event mpm_worker mpm_prefork 2>/dev/null || true' >> /entrypoint.sh && \
+    echo 'rm -f /etc/apache2/mods-enabled/mpm_*.load /etc/apache2/mods-enabled/mpm_*.conf' >> /entrypoint.sh && \
+    echo 'a2enmod mpm_prefork' >> /entrypoint.sh && \
+    echo '' >> /entrypoint.sh && \
     echo '# Use Railway PORT or default to 8080' >> /entrypoint.sh && \
     echo 'PORT=${PORT:-8080}' >> /entrypoint.sh && \
     echo '' >> /entrypoint.sh && \
