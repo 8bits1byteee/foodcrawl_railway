@@ -19,14 +19,35 @@ RUN docker-php-ext-install \
     mysqli \
     && docker-php-ext-enable pdo pdo_mysql mysqli
 
-# Enable Apache mod_rewrite and mod_env for environment variables
-RUN a2enmod rewrite && a2enmod env
+# Fix Apache MPM conflict - disable conflicting modules and keep only mpm_prefork
+RUN a2dismod mpm_worker mpm_event 2>/dev/null || true && \
+    a2enmod mpm_prefork && \
+    a2enmod rewrite && \
+    a2enmod env
 
 # Copy Apache config
 COPY .docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Create entrypoint script to configure dynamic port
-RUN echo '#!/bin/bash\nset -e\n\n# Use Railway PORT or default to 8080\nPORT=${PORT:-8080}\n\n# Update Apache port in configuration\nsed -i "s/<VirtualHost \*:[0-9]*>/<VirtualHost *:${PORT}>/g" /etc/apache2/sites-available/000-default.conf\nsed -i "s/Listen [0-9]*/Listen ${PORT}/" /etc/apache2/ports.conf 2>/dev/null || echo "Listen ${PORT}" >> /etc/apache2/ports.conf\n\necho "Starting Apache on port ${PORT}"\nexec apache2-foreground' > /entrypoint.sh && chmod +x /entrypoint.sh
+RUN echo '#!/bin/bash' > /entrypoint.sh && \
+    echo 'set -e' >> /entrypoint.sh && \
+    echo '' >> /entrypoint.sh && \
+    echo '# Use Railway PORT or default to 8080' >> /entrypoint.sh && \
+    echo 'PORT=${PORT:-8080}' >> /entrypoint.sh && \
+    echo '' >> /entrypoint.sh && \
+    echo '# Update Apache port configuration' >> /entrypoint.sh && \
+    echo 'sed -i "s/<VirtualHost \*:[0-9]*>/<VirtualHost *:${PORT}>/g" /etc/apache2/sites-available/000-default.conf' >> /entrypoint.sh && \
+    echo '' >> /entrypoint.sh && \
+    echo '# Update ports.conf' >> /entrypoint.sh && \
+    echo 'if grep -q "Listen" /etc/apache2/ports.conf 2>/dev/null; then' >> /entrypoint.sh && \
+    echo '  sed -i "s/^Listen .*/Listen ${PORT}/" /etc/apache2/ports.conf' >> /entrypoint.sh && \
+    echo 'else' >> /entrypoint.sh && \
+    echo '  echo "Listen ${PORT}" >> /etc/apache2/ports.conf' >> /entrypoint.sh && \
+    echo 'fi' >> /entrypoint.sh && \
+    echo '' >> /entrypoint.sh && \
+    echo 'echo "Starting Apache on port ${PORT}"' >> /entrypoint.sh && \
+    echo 'exec apache2-foreground' >> /entrypoint.sh && \
+    chmod +x /entrypoint.sh
 
 # Copy application files
 COPY . /var/www/html/
